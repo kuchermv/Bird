@@ -1,0 +1,1 @@
+g++ -Ic:/SFML/include -Lc:/SFML/lib ./src/*.cpp -lsfml-system -lsfml-graphics -lsfml-window
