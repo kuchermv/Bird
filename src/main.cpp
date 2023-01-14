@@ -3,6 +3,7 @@
 
 #include "background.h"
 #include "spritesheet.h"
+#include "player.h"
 
 int main() {
 
@@ -16,6 +17,11 @@ int main() {
 	Background bg1(spritesheet.GetSprite("groundDirt", FlipStatus::FLIPED_XY));
 	Background bg2(spritesheet.GetSprite("groundGrass"), 480-71);
 
+	Player player(spritesheet.GetSprite("planeRed1"));
+	SpriteAnimator& sa = player.GetSpriteAnimator();
+	std::vector<std::string> frames{"planeRed1", "planeRed2", "planeRed3"};
+	sa.SetFrames(spritesheet, frames);
+
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -28,11 +34,13 @@ int main() {
 		bg.MoveLeft(50.0 * dt);
 		bg1.MoveLeft(100.0 * dt);
 		bg2.MoveLeft(100.0 * dt);
+		player.Tick(dt);
 
 		window.clear();
 			window.draw(bg);
 			window.draw(bg1);
 			window.draw(bg2);
+			window.draw(player);
 		window.display();
 	}
 	return 0;

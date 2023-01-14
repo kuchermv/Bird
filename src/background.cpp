@@ -22,4 +22,4 @@ void Background::MoveLeft(float offset) {
 void Background::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(bg1, states);
 	target.draw(bg2, states);
-};
+}

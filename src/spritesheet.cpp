@@ -23,8 +23,7 @@ Spritesheet::Spritesheet() {
 	}
 }
 
-sf::Sprite Spritesheet::GetSprite(const std::string& name, FlipStatus flipStatus) {
-	sf::Sprite result(tex);
+sf::IntRect Spritesheet::GetRect(const std::string& name, FlipStatus flipStatus) {
 	sf::IntRect rect = items[name];
 	if (flipStatus == FlipStatus::FLIPED_X || flipStatus == FlipStatus::FLIPED_XY) {
 		rect.left += rect.width;
@@ -34,6 +33,12 @@ sf::Sprite Spritesheet::GetSprite(const std::string& name, FlipStatus flipStatus
 		rect.top += rect.height;
 		rect.height = -rect.height;
 	}
+	return rect;
+}
+
+sf::Sprite Spritesheet::GetSprite(const std::string& name, FlipStatus flipStatus) {
+	sf::Sprite result(tex);
+	sf::IntRect rect = GetRect(name, flipStatus);
 	result.setTextureRect(rect);
 	return result;
 }

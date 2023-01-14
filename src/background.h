@@ -2,7 +2,7 @@
 
 class Background : public sf::Drawable {
 private:
-    sf::Sprite bg1, bg2;
+	sf::Sprite bg1, bg2;
 	float width;
 
 public:
@@ -11,5 +11,5 @@ public:
 	void MoveLeft(float offset);
 
 private:
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

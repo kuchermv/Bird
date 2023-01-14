@@ -11,5 +11,6 @@ private:
 public:
 	Spritesheet();
 
+	sf::IntRect GetRect(const std::string& name, FlipStatus flipStatus = FlipStatus::NORMAL);
 	sf::Sprite GetSprite(const std::string& name, FlipStatus flipStatus = FlipStatus::NORMAL);
 };
