@@ -13,15 +13,10 @@ int main() {
 
 	sf::Clock clock;
 	Spritesheet spritesheet;
-	/*
-	Background bg(spritesheet.GetSprite("background"));
-	Background bg1(spritesheet.GetSprite("groundDirt", FlipStatus::FLIPED_XY));
-	Background bg2(spritesheet.GetSprite("groundGrass"), 480-71);
 
-	Background bg(spritesheet.InitSprite(bg, "background"));
-	Background bg1(spritesheet.InitSprite(bg1, "groundDirt", FlipStatus::FLIPED_XY));
-	Background bg2(spritesheet.InitSprite(bg, 2"groundGrass"), 480-71);
-	*/
+	sf::Sprite bgSprite;
+	spritesheet.InitSprite(bgSprite, "background");
+	Background bg(bgSprite, 50);
 
 	Obstacle o;
 	spritesheet.InitSprite(o, "rockDown", FlipStatus::FLIPED_XY);
@@ -45,15 +40,11 @@ int main() {
 		}
 
 		float dt = clock.restart().asSeconds();
-		//bg.MoveLeft(50.0 * dt);
-		//bg1.MoveLeft(100.0 * dt);
-		//bg2.MoveLeft(100.0 * dt);
+		bg.Tick(dt);
 		player.Tick(dt);
 
 		window.clear();
-			//window.draw(bg);
-			//window.draw(bg1);
-			//window.draw(bg2);
+			bg.Draw(window);
 			window.draw(player);
 			window.draw(o);
 			o.DebugDrawPoints(window);

@@ -1,15 +1,13 @@
 #include <SFML/Graphics.hpp>
 
-class Background : public sf::Drawable {
+class Background : public sf::Sprite {
 private:
-	sf::Sprite bg1, bg2;
-	float width;
+	sf::Sprite s;
+	int width;
+	float speed;
 
 public:
-	Background(const sf::Sprite& sprite, float yPos = 0.0);
-
-	void MoveLeft(float offset);
-
-private:
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	Background(const sf::Sprite& sprite, float theSpeed);
+	void Tick(float dt);
+	void Draw(sf::RenderTarget& target) const;
 };

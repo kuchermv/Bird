@@ -2,24 +2,18 @@
 #include <cmath>
 #include <iostream>
 
-Background::Background(const sf::Sprite& sprite, float yPos) {
-	bg1 = sprite;
-	bg2 = sprite;
-
+Background::Background(const sf::Sprite& sprite, float theSpeed) : s(sprite), speed(theSpeed){
 	width = fabs(sprite.getTextureRect().width);
-	bg1.setPosition(0, yPos);
-	bg2.setPosition(width, yPos);
 }
 
-void Background::MoveLeft(float offset) {
-	sf::Vector2f pos = bg1.getPosition();
-	pos.x = fmodf(pos.x - offset, width);
-	bg1.setPosition(pos);
-	pos.x += width;
-	bg2.setPosition(pos);
+void Background::Tick(float dt) {
+	sf::Vector2f pos = s.getPosition();
+	pos.x = fmodf(pos.x - speed * dt, width);
+	s.setPosition(pos);
 }
 
-void Background::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	target.draw(bg1, states);
-	target.draw(bg2, states);
+void Background::Draw(sf::RenderTarget& target) const {
+	target.draw(s);
+	sf::RenderStates states(sf::Transform().translate(width, 0));
+	target.draw(s, states);
 }
