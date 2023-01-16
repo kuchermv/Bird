@@ -2,16 +2,13 @@
 
 #include "spriteAnimator.h"
 
-class Player : public sf::Drawable {
+class Player : public sf::Sprite {
 private:
-    sf::Sprite sprite;
 	SpriteAnimator sa;
 
 public:
-	Player(const sf::Sprite& sprite);
+	Player();
 	SpriteAnimator& GetSpriteAnimator() { return sa; }
 	void Tick(float dt);
 
-private:
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

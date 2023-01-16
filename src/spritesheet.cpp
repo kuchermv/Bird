@@ -36,9 +36,8 @@ sf::IntRect Spritesheet::GetRect(const std::string& name, FlipStatus flipStatus)
 	return rect;
 }
 
-sf::Sprite Spritesheet::GetSprite(const std::string& name, FlipStatus flipStatus) {
-	sf::Sprite result(tex);
+void Spritesheet::InitSprite(sf::Sprite& sprite, const std::string& name, FlipStatus flipStatus) {
+	sprite.setTexture(tex);
 	sf::IntRect rect = GetRect(name, flipStatus);
-	result.setTextureRect(rect);
-	return result;
+	sprite.setTextureRect(rect);
 }
