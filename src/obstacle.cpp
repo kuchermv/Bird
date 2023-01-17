@@ -31,3 +31,8 @@ void Obstacle::DebugDrawPoints(sf::RenderWindow& rw) {
 		rw.draw(shape);
 	}
 }
+
+bool Obstacle::IsLeftPlayArea() {
+	sf::FloatRect fr = getGlobalBounds();
+	return (fr.left + fr.width) <= 0;
+}

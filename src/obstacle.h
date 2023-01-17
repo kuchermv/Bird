@@ -10,4 +10,5 @@ public:
 
 	//void Check();
 	void DebugDrawPoints(sf::RenderWindow& rw);
+	bool IsLeftPlayArea();
 };

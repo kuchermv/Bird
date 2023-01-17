@@ -18,12 +18,33 @@ int main() {
 	spritesheet.InitSprite(bgSprite, "background");
 	Background bg(bgSprite, 50);
 
-	Obstacle o;
-	spritesheet.InitSprite(o, "rockDown", FlipStatus::FLIPED_XY);
-	o.AddPoint(sf::Vector2f(108, 0));
-	o.AddPoint(sf::Vector2f(66, 239));
-	o.move(300, 0);
+	std::vector<sf::Vector2f> rockHitPoints;
+	{
+		rockHitPoints.push_back(sf::Vector2f(0, 0));
+		rockHitPoints.push_back(sf::Vector2f(6, 24));
+		rockHitPoints.push_back(sf::Vector2f(15, 52));
+		rockHitPoints.push_back(sf::Vector2f(22, 78));
+		rockHitPoints.push_back(sf::Vector2f(27, 102));
+		rockHitPoints.push_back(sf::Vector2f(38, 121));
+		rockHitPoints.push_back(sf::Vector2f(44, 147));
+		rockHitPoints.push_back(sf::Vector2f(49, 170));
+		rockHitPoints.push_back(sf::Vector2f(53, 194));
+		rockHitPoints.push_back(sf::Vector2f(58, 218));
+		rockHitPoints.push_back(sf::Vector2f(66, 237));
+		rockHitPoints.push_back(sf::Vector2f(71, 214));
+		rockHitPoints.push_back(sf::Vector2f(75, 187));
+		rockHitPoints.push_back(sf::Vector2f(78, 160));
+		rockHitPoints.push_back(sf::Vector2f(84, 136));
+		rockHitPoints.push_back(sf::Vector2f(89, 111));
+		rockHitPoints.push_back(sf::Vector2f(93, 82));
+		rockHitPoints.push_back(sf::Vector2f(100, 59));
+		rockHitPoints.push_back(sf::Vector2f(103, 33));
+		rockHitPoints.push_back(sf::Vector2f(108, 0));
+	}
 
+	Obstacle o;
+	spritesheet.InitSprite(o, "rockDown");
+	o.AddPoints(rockHitPoints);
 
 	Player player;
 	spritesheet.InitSprite(player, "planeRed1");
@@ -37,6 +58,9 @@ int main() {
 			if ((event.type == sf::Event::Closed) || ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))) {
 				window.close();
 			}
+			if((event.type == sf::Event::MouseButtonPressed) && event.mouseButton.button == sf::Mouse::Button::Left) {
+				std::cout << event.mouseButton.x << ", " << event.mouseButton.y << std::endl;
+			}
 		}
 
 		float dt = clock.restart().asSeconds();
@@ -45,9 +69,11 @@ int main() {
 
 		window.clear();
 			bg.Draw(window);
-			window.draw(player);
+
 			window.draw(o);
 			o.DebugDrawPoints(window);
+
+			//window.draw(player);
 		window.display();
 	}
 	return 0;
