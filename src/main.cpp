@@ -42,7 +42,8 @@ int main() {
 		rockHitPoints.push_back(sf::Vector2f(108, 0));
 	}
 
-	Obstacle o;
+	Obstacle o(100);
+	o.move(800, 0);
 	spritesheet.InitSprite(o, "rockDown");
 	o.AddPoints(rockHitPoints);
 
@@ -51,6 +52,8 @@ int main() {
 	SpriteAnimator& sa = player.GetSpriteAnimator();
 	std::vector<std::string> frames{"planeRed1", "planeRed2", "planeRed3"};
 	sa.SetFrames(spritesheet, frames);
+
+	player.move(50, 150);
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -66,6 +69,16 @@ int main() {
 		float dt = clock.restart().asSeconds();
 		bg.Tick(dt);
 		player.Tick(dt);
+		o.Tick(dt);
+
+		if (o.IsLeftPlayArea()) {
+			o.move(1000, 0);
+		}
+
+		player.setColor(sf::Color::White);
+		if (o.CheckHit(player.getGlobalBounds())) {
+			player.setColor(sf::Color::Red);
+		}
 
 		window.clear();
 			bg.Draw(window);
@@ -73,7 +86,7 @@ int main() {
 			window.draw(o);
 			o.DebugDrawPoints(window);
 
-			//window.draw(player);
+			window.draw(player);
 		window.display();
 	}
 	return 0;
